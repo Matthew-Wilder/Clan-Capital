@@ -9,6 +9,10 @@ import lombok.Setter;
 @Entity
 public class DistrictBuildingLimit {
     @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name="districtEnumId", column = @Column(name="district_enum_id")),
+            @AttributeOverride(name="buildingEnumId", column = @Column(name="building_enum_id"))
+    })
     private DistrictBuildingLimitId id;
 
     @ManyToOne

@@ -13,17 +13,11 @@ public class BuildingInstance {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "district_enum_id")
     private DistrictEnum districtEnum;
 
     @ManyToOne
-    @JoinColumn(name = "building_enum_id")
     private BuildingEnum buildingEnum;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "building_enum_id", referencedColumnName = "building_enum_id"),
-            @JoinColumn(name = "level", referencedColumnName = "level")
-    })
-    private BuildingUpgrade buildingUpgrade;  // Represents the linked building_upgrade
+    private BuildingUpgrade buildingUpgrade;
 }
