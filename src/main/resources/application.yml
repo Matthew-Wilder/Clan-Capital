@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    default: h2
+    active: dev
+server:
+  error:
+    path: /error
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: h2
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/clan_capital
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER_3306}
+    password: ${DB_PASS_3306}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
+
