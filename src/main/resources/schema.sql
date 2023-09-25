@@ -9,11 +9,20 @@ CREATE TABLE IF NOT EXISTS `district_enum`
     `name` VARCHAR(100) NOT NULL UNIQUE
 );
 
+
+CREATE TABLE IF NOT EXISTS `building_category`
+(
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL UNIQUE
+);
+
 -- All buildings
 CREATE TABLE IF NOT EXISTS `building_enum`
 (
 	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(100) NOT NULL UNIQUE
+	`name` VARCHAR(100) NOT NULL UNIQUE,
+	`category_id` INT NOT NULL,
+    FOREIGN KEY (`category_id`) REFERENCES `building_category`(`id`) ON DELETE NO ACTION
 );
 
 -- All building upgrades with level and cost
