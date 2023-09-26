@@ -7,7 +7,7 @@ INSERT INTO `building_category` (id, name) VALUES
 (6, "Army");
 
 INSERT INTO `building_enum` (id, name, category_id) VALUES
-(1, "Capital Hall", 5),
+(1, "Capital Hall", 1),
 (2, "District Hall", 5),
 (3, "Cannon", 1),
 (4, "Spear Thrower", 1),
@@ -42,9 +42,9 @@ INSERT INTO `building_enum` (id, name, category_id) VALUES
 (33, "Super Wizard Barracks", 2),
 (34, "Rocket Balloon Barracks", 2),
 (35, "Skeleton Barrel Barracks", 2),
-(36, "Flying Fortress Barracks", 2),
+(36, "Flying Fortress Yard", 2),
 (37, "Raid Cart Barracks", 2),
-(38, "Super P.E.K.K.A Barracks", 2),
+(38, "Power P.E.K.K.A Barracks", 2),
 (39, "Hog Raider Barracks", 2),
 (40, "Super Dragon Barracks", 2),
 (41, "Mountain Golem Quarry", 2),
