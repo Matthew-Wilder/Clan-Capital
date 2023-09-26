@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="accordion" id="allDistrictsAccordion">
-    <div class="district accordion-item" th:each="district : ${districts}" th:id="'district-accordion-' + ${district.id}">
+    <div class="district accordion-item" th:each="district : ${clanCapital.getDistricts()}" th:id="'district-accordion-' + ${district.id}">
         <h2 class="accordion-header" >
             <button
                     class="accordion-button"
@@ -27,7 +27,7 @@
             </button>
         </h2>
         <div th:id="'collapse-district-' + ${district.id}" class="accordion-collapse collapse">
-            <div class="building accordion-item" th:each="building : ${district.getSortedBuildings()}">
+            <div class="building accordion-item" th:each="building : ${district.getAvailableBuildings()}">
                 <h2 class="accordion-header" id="building1">
                     <button
                             class="accordion-button"
@@ -40,21 +40,21 @@
                     </button>
                 </h2>
                 <div th:id="'collapse-building-' + ${building.id}" class="accordion-collapse collapse">
-                    <div class="instance accordion-item" th:each="buildingInstance : ${building.getSortedInstances(district)}">
+                    <div class="instance accordion-item" th:each="buildingInstance : ${district.filterBuildingInstances(building)}">
                         <h2 class="accordion-header" id="instance1">
                             <button
                                     class="accordion-button"
                                     type="button"
                                     data-bs-toggle="collapse"
                                     th:attr="data-bs-target='#collapse-instance-' + ${buildingInstance.id}"
-                                    th:text="${buildingInstance.buildingUpgrade.getLevelProgress()}"
+                                    th:text="${buildingInstance.getCanonicalLevel()}"
                             >
                                 My Building Instance
                             </button>
                         </h2>
-<!--                        todo upgrade progress dropdown-->
-                        <div th:id="'collapse-instance-' + ${buildingInstance.id}" class="accordion-collapse collapse" th:each="level : ${buildingInstance.buildingEnum.sortedUpgrades()}">
-                            <div class="upgrade" th:text="${level.getLevel()} + ' - ' + ${level.getCost()}">
+                        <!--                        todo upgrade progress dropdown-->
+                        <div th:id="'collapse-instance-' + ${buildingInstance.id}" class="accordion-collapse collapse" th:each="upgrade : ${buildingInstance.getBuilding().getUpgrades()}">
+                            <div class="upgrade" th:text="${upgrade.getLevel()} + ' - ' + ${upgrade.getCost()}">
                                 My Upgrades
                             </div>
                         </div>

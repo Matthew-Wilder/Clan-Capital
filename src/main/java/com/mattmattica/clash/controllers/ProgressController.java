@@ -1,5 +1,6 @@
 package com.mattmattica.clash.controllers;
 
+import com.mattmattica.clash.model.dto.ClanCapitalDTO;
 import com.mattmattica.clash.model.entities.BuildingInstance;
 import com.mattmattica.clash.model.entities.BuildingUpgrade;
 import com.mattmattica.clash.model.entities.DistrictEnum;
@@ -7,6 +8,7 @@ import com.mattmattica.clash.model.repositories.BuildingEnumRepository;
 import com.mattmattica.clash.model.repositories.BuildingInstanceRepository;
 import com.mattmattica.clash.model.repositories.BuildingUpgradeRepository;
 import com.mattmattica.clash.model.repositories.DistrictEnumRepository;
+import com.mattmattica.clash.model.services.ClanCapitalService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,10 +35,13 @@ public class ProgressController {
     private BuildingUpgradeRepository upgradeRepo;
     @Autowired
     private BuildingInstanceRepository instanceRepository;
+    @Autowired
+    private ClanCapitalService clanCapitalService;
 
     @GetMapping("/progress")
     public String home(Model model) {
-        model.addAttribute("districts",  districtRepo.findAllSorted());
+        ClanCapitalDTO clanCapital = clanCapitalService.getClanCapital();
+        model.addAttribute("clanCapital", clanCapital);
         return "progress";
     }
 

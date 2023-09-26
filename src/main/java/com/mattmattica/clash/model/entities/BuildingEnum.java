@@ -34,7 +34,6 @@ public class BuildingEnum implements Comparable<BuildingEnum> {
     private Set<BuildingInstance> instances = new HashSet<>();
 
     public List<BuildingInstance> getSortedInstances() {
-        System.out.println(this.getInstances().size());
         return this.getInstances().stream().sorted().toList();
     }
 
@@ -43,7 +42,6 @@ public class BuildingEnum implements Comparable<BuildingEnum> {
     }
 
     public List<BuildingInstance> getSortedInstances(DistrictEnum district) {
-        System.out.println(this.getInstances().size());
         return this.getInstances().stream().filter(b -> b.getDistrictEnum().equals(district)).sorted().toList();
     }
 
