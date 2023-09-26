@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS `building_instance`
 	`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, -- Which specific building instance
 	`district_enum_id` INT NOT NULL, -- What district
     `building_enum_id` INT NOT NULL, -- What building
-	`level` INT NOT NULL, -- What level
+	`building_upgrade_id` INT NOT NULL, -- What level
 	FOREIGN KEY (`district_enum_id`) REFERENCES `district_enum`(`id`) ON DELETE NO ACTION,
 	FOREIGN KEY (`building_enum_id`) REFERENCES `building_enum`(`id`) ON DELETE NO ACTION,
-    FOREIGN KEY (`building_enum_id`, `level`) REFERENCES `building_upgrade`(`building_enum_id`, `level`) ON DELETE NO ACTION
+    FOREIGN KEY (`building_upgrade_id`) REFERENCES `building_upgrade`(`id`) ON DELETE NO ACTION
 );
 
 -- How many of each building can be built in a district

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.google.com/specimen/Bitter" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="accordion" id="allDistrictsAccordion">
+    <div class="district accordion-item" th:each="district : ${districts}" th:id="'district-accordion-' + ${district.id}">
+        <h2 class="accordion-header" >
+            <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    th:attr="data-bs-target='#collapse-district-' + ${district.id}"
+                    th:text="${district.name}">
+                My District
+            </button>
+        </h2>
+        <div th:id="'collapse-district-' + ${district.id}" class="accordion-collapse collapse">
+            <div class="building accordion-item" th:each="building : ${district.getSortedBuildings()}">
+                <h2 class="accordion-header" id="building1">
+                    <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            th:attr="data-bs-target='#collapse-building-' + ${building.id}"
+                            th:text="${building.name}"
+                    >
+                        My Building
+                    </button>
+                </h2>
+                <div th:id="'collapse-building-' + ${building.id}" class="accordion-collapse collapse">
+                    <div class="instance accordion-item" th:each="buildingInstance : ${building.getSortedInstances(district)}">
+                        <h2 class="accordion-header" id="instance1">
+                            <button
+                                    class="accordion-button"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    th:attr="data-bs-target='#collapse-instance-' + ${buildingInstance.id}"
+                                    th:text="${buildingInstance.buildingUpgrade.getLevelProgress()}"
+                            >
+                                My Building Instance
+                            </button>
+                        </h2>
+<!--                        todo upgrade progress dropdown-->
+                        <div th:id="'collapse-instance-' + ${buildingInstance.id}" class="accordion-collapse collapse" th:each="level : ${buildingInstance.buildingEnum.sortedUpgrades()}">
+                            <div class="upgrade" th:text="${level.getLevel()} + ' - ' + ${level.getCost()}">
+                                My Upgrades
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar structure for other instances within Building 1 -->
+                </div>
+            </div>
+            <!-- Repeat similar structure for other buildings within District 1 -->
+        </div>
+    </div>
+    <!-- Repeat similar structure for other districts -->
+</div>
+</body>
+</html>
