@@ -1,0 +1,28 @@
+<th:block th:fragment="progress-bar(percent)">
+    <div class="progress progress-tracker-bar">
+        <div class="progress-bar" role="progressbar" th:style="'width: ' + ${percent} + '%'"
+             th:attr="aria-valuenow=${percent}"
+             aria-valuemin="0"
+             aria-valuemax="100"
+        ></div>
+    </div>
+</th:block>
+
+<th:block th:fragment="percentage-data-bar(percentageData)">
+    <th:block th:replace="~{fragments :: percentage-data-bar-bg(${percentageData}, 'bg-success')}"></th:block>
+</th:block>
+<th:block th:fragment="percentage-data-bar-gold(percentageData)">
+    <th:block th:replace="~{fragments :: percentage-data-bar-bg(${percentageData}, 'bg-warning')}"></th:block>
+</th:block>
+
+<th:block th:fragment="percentage-data-bar-bg(percentageData, background)">
+    <div class="progress progress-tracker-bar position-relative">
+        <div class="progress-bar" role="progressbar"
+             th:style="'width: ' + ${percentageData.getPercentage()} + '%'"
+             th:attr="aria-valuenow=${percentageData.amount},aria-valuemax=${percentageData.maxAmount}"
+             th:classappend="${background}"
+             aria-valuemin="0"
+        ></div>
+        <small class="justify-content-center d-flex position-absolute w-100" th:text="${percentageData.getCanonicalForm()}">60% complete</small>
+    </div>
+</th:block>

@@ -10,4 +10,6 @@ public interface BuildingEnumRepository extends ListCrudRepository<BuildingEnum,
     default List<BuildingEnum> findAllSorted() {
         return this.findAll().stream().sorted().toList();
     }
+
+    BuildingEnum findByName(String name);
 }

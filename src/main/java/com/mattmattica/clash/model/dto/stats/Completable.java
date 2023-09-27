@@ -9,7 +9,7 @@ public interface Completable extends Buildable {
     int getNumberOfDistricts();
 
     default double getPercentageOfDistrictsCompleted() {
-        return MathUtils.divide(getNumberOfDistrictsCompleted(), getNumberOfDistricts());
+        return MathUtils.divide(getNumberOfDistrictsCompleted(), getNumberOfDistricts()) * 100;
     }
 
     @Override

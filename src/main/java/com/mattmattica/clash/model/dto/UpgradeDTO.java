@@ -9,4 +9,8 @@ public class UpgradeDTO {
     int id;
     int level;
     int cost;
+
+    public String getFormattedCost() {
+        return String.format("%,d", cost);
+    }
 }

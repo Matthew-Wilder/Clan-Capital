@@ -8,7 +8,7 @@ public interface Buildable extends Upgradable {
     int getNumberOfBuildings();
 
     default double getPercentageOfBuildingsMaxed() {
-        return MathUtils.divide(getNumberOfBuildingsMaxed(), getNumberOfBuildings());
+        return MathUtils.divide(getNumberOfBuildingsMaxed(), getNumberOfBuildings()) * 100;
     }
 
     @Override

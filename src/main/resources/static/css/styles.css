@@ -13,3 +13,58 @@
 .upgrade {
     margin-left: 40px;
 }
+
+/*.progress-tracker-bar {*/
+/*    width: 30%;*/
+/*    right: 69px;*/
+/*    position: absolute;*/
+/*}*/
+.dropdown-header-text {
+    width: 25%;
+}
+
+.progress-bar-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* To evenly distribute progress bars */
+}
+
+.progress-tracker-bar {
+    width: 100%;
+    margin: 0 5px;
+}
+
+.progress-tracker-bar > small {
+    color: black;
+}
+
+.upgrade-flex-container {
+    padding: 8px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.upgrade-flex-container .flex-item {
+    margin-right: 10px; /* Add spacing between items */
+    text-align: center;
+}
+
+.upgrade-button {
+    width: 90px;
+    height: 60px;
+    border: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: cadetblue;
+}
+
+.upgrade-button.completed {
+    background-color: lightgreen;
+}
+
+.upgrade-button.missing {
+    background-color: yellow;
+}

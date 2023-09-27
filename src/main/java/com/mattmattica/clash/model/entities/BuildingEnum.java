@@ -33,6 +33,17 @@ public class BuildingEnum implements Comparable<BuildingEnum> {
     @OneToMany(mappedBy = "buildingEnum")
     private Set<BuildingInstance> instances = new HashSet<>();
 
+    public BuildingUpgrade getMaxUpgrade() {
+        var upgrades = this.upgrades.stream().toList();
+        BuildingUpgrade currentMax = upgrades.get(0);
+        for (var upgrade : upgrades) {
+            if (upgrade.getLevel() > currentMax.getLevel()) {
+                currentMax = upgrade;
+            }
+        }
+        return currentMax;
+    }
+
     public List<BuildingInstance> getSortedInstances() {
         return this.getInstances().stream().sorted().toList();
     }

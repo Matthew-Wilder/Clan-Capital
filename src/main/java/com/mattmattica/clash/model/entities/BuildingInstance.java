@@ -27,6 +27,7 @@ public class BuildingInstance implements Comparable<BuildingInstance> {
             .comparing(BuildingInstance::getBuildingUpgrade)
             .thenComparing(BuildingInstance::getId);
 
+
     @Override
     public int compareTo(BuildingInstance o) {
         return COMPARATOR.compare(this, o);

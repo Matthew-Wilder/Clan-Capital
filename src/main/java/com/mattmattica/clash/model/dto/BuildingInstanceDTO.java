@@ -1,6 +1,7 @@
 package com.mattmattica.clash.model.dto;
 
 
+import com.mattmattica.clash.model.dto.stats.PercentageData;
 import com.mattmattica.clash.model.dto.stats.Upgradable;
 import lombok.Data;
 
@@ -27,5 +28,26 @@ public class BuildingInstanceDTO implements Upgradable {
 
     public String getCanonicalLevel() {
         return String.format("Level %s/%s", upgrade.getLevel(), getNumberOfUpgrades());
+    }
+
+    public PercentageData getUpgradePercentageData() {
+//         TODO optimize
+        return new PercentageData(getNumberOfUpgradesCompleted(), getNumberOfUpgrades());
+    }
+
+    public boolean hasUpgrade(UpgradeDTO upgrade) {
+        return upgrade.getLevel() <= this.upgrade.getLevel();
+    }
+
+    public PercentageData getCostPercentageData() {
+        int amountSpent = 0;
+        int totalAmount = 0;
+        for (UpgradeDTO upgrade : building.getUpgrades()) {
+            totalAmount += upgrade.getCost();
+            if (hasUpgrade(upgrade)) {
+                amountSpent += upgrade.getCost();
+            }
+        }
+        return new PercentageData(amountSpent, totalAmount);
     }
 }

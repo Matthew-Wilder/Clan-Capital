@@ -9,7 +9,7 @@ public interface Upgradable {
     int getNumberOfUpgrades();
 
     default double getPercentageOfUpgradesCompleted() {
-        return MathUtils.divide(getNumberOfUpgradesCompleted(), getNumberOfUpgrades());
+        return MathUtils.divide(getNumberOfUpgradesCompleted(), getNumberOfUpgrades()) * 100;
     }
 
     default boolean isMaxed() {

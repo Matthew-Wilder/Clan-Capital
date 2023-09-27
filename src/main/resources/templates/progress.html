@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="accordion" id="allDistrictsAccordion">
@@ -22,8 +23,12 @@
                     type="button"
                     data-bs-toggle="collapse"
                     th:attr="data-bs-target='#collapse-district-' + ${district.id}"
-                    th:text="${district.name}">
-                My District
+            >
+                <div class="dropdown-header-text" th:text="${district.name}">My District Name</div>
+                <div class="progress-bar-container">
+                    <th:block th:replace="~{fragments :: percentage-data-bar(${district.getUpgradePercentageData()})}"></th:block>
+                    <th:block th:replace="~{fragments :: percentage-data-bar-gold(${district.getCostPercentageData()})}"></th:block>
+                </div>
             </button>
         </h2>
         <div th:id="'collapse-district-' + ${district.id}" class="accordion-collapse collapse">
@@ -33,13 +38,16 @@
                             class="accordion-button"
                             type="button"
                             data-bs-toggle="collapse"
-                            th:attr="data-bs-target='#collapse-building-' + ${building.id}"
-                            th:text="${building.name}"
+                            th:attr="data-bs-target='#collapse-building-' + ${building.id} + '-' + ${district.id}"
                     >
-                        My Building
+                        <div class="dropdown-header-text" th:text="${building.name}">My District Name</div>
+                        <div class="progress-bar-container">
+                            <th:block th:replace="~{fragments :: percentage-data-bar(${district.getPercentageOfUpgradesCompleted(building)})}"></th:block>
+                            <th:block th:replace="~{fragments :: percentage-data-bar-gold(${district.getCostPercentageData(building)})}"></th:block>
+                        </div>
                     </button>
                 </h2>
-                <div th:id="'collapse-building-' + ${building.id}" class="accordion-collapse collapse">
+                <div th:id="'collapse-building-' + ${building.id} + '-' + ${district.id}" class="accordion-collapse collapse">
                     <div class="instance accordion-item" th:each="buildingInstance : ${district.filterBuildingInstances(building)}">
                         <h2 class="accordion-header" id="instance1">
                             <button
@@ -47,15 +55,25 @@
                                     type="button"
                                     data-bs-toggle="collapse"
                                     th:attr="data-bs-target='#collapse-instance-' + ${buildingInstance.id}"
-                                    th:text="${buildingInstance.getCanonicalLevel()}"
                             >
-                                My Building Instance
+                                <div class="dropdown-header-text" th:text="${buildingInstance.getCanonicalLevel()}">My District Name</div>
+                                <div class="progress-bar-container">
+                                    <th:block th:replace="~{fragments :: percentage-data-bar(${buildingInstance.getUpgradePercentageData()})}"></th:block>
+                                    <th:block th:replace="~{fragments :: percentage-data-bar-gold(${buildingInstance.getCostPercentageData()})}"></th:block>
+                                </div>
                             </button>
                         </h2>
                         <!--                        todo upgrade progress dropdown-->
-                        <div th:id="'collapse-instance-' + ${buildingInstance.id}" class="accordion-collapse collapse" th:each="upgrade : ${buildingInstance.getBuilding().getUpgrades()}">
-                            <div class="upgrade" th:text="${upgrade.getLevel()} + ' - ' + ${upgrade.getCost()}">
-                                My Upgrades
+                        <div th:id="'collapse-instance-' + ${buildingInstance.id}" class="accordion-collapse collapse">
+                            <div class="upgrade-flex-container upgrade">
+                                <div class="flex-item" th:each="upgrade : ${buildingInstance.getBuilding().getUpgrades()}">
+                                    <div class="upgrade-button" th:classappend="${buildingInstance.hasUpgrade(upgrade)} ? 'completed' : 'missing'"
+                                         th:attr="hx-put='/upgrade-building/' + ${buildingInstance.id} + '/' + ${upgrade.getId()}"
+                                    >
+                                        <div th:text="'Level ' + ${upgrade.getLevel()}"></div>
+                                        <div th:text="${upgrade.getFormattedCost()}"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

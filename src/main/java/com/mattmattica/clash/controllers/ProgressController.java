@@ -1,6 +1,8 @@
 package com.mattmattica.clash.controllers;
 
 import com.mattmattica.clash.model.dto.ClanCapitalDTO;
+import com.mattmattica.clash.model.dto.DistrictDTO;
+import com.mattmattica.clash.model.dto.stats.PercentageData;
 import com.mattmattica.clash.model.entities.BuildingInstance;
 import com.mattmattica.clash.model.entities.BuildingUpgrade;
 import com.mattmattica.clash.model.entities.DistrictEnum;
@@ -42,6 +44,9 @@ public class ProgressController {
     public String home(Model model) {
         ClanCapitalDTO clanCapital = clanCapitalService.getClanCapital();
         model.addAttribute("clanCapital", clanCapital);
+        PercentageData pd = new PercentageData();
+        clanCapital.getDistricts().stream().map(DistrictDTO::getCostPercentageData).forEach(pd::add);
+        System.out.println(pd.getMaxAmount());
         return "progress";
     }
 
