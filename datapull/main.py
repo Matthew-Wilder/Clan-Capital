@@ -75,6 +75,8 @@ def process_building(building: BuildingEnum) -> BuildingData:
         col_index = 2
     elif building.category == category_repo.find_by_name("Army"):
         col_index = 3
+    elif building.category == category_repo.find_by_name("Special Defense"):
+        col_index = 5
     else:
         col_index = 4
 

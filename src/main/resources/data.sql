@@ -4,7 +4,8 @@ INSERT INTO `building_category` (id, name) VALUES
 (3, "Spell Factory"),
 (4, "Trap"),
 (5, "Other"),
-(6, "Army");
+(6, "Army"),
+(7, "Special Defense");
 
 INSERT INTO `building_enum` (id, name, category_id) VALUES
 (1, "Capital Hall", 1),
@@ -13,21 +14,21 @@ INSERT INTO `building_enum` (id, name, category_id) VALUES
 (4, "Spear Thrower", 1),
 (5, "Air Defense", 1),
 (6, "Multi Cannon", 1),
-(7, "Bomb Tower", 1),
+(7, "Bomb Tower", 7),
 (8, "Multi Mortar", 1),
-(9, "Super Wizard Tower", 1),
+(9, "Super Wizard Tower", 7),
 (10, "Air Bombs", 1),
 (11, "Rapid Rockets", 1),
 (12, "Crusher", 1),
-(13, "Hidden Mega Tesla", 1),
+(13, "Hidden Mega Tesla", 7),
 (14, "Giant Cannon", 1),
 (15, "Rocket Artillery", 1),
-(16, "Inferno Tower", 1),
+(16, "Inferno Tower", 7),
 (17, "Blast Bow", 1),
-(18, "Super Giant Post", 1),
-(19, "Raid Cart Post", 1),
-(20, "Super Dragon Post", 1),
-(21, "Walls", 1),
+(18, "Super Giant Post", 6),
+(19, "Raid Cart Post", 6),
+(20, "Super Dragon Post", 6),
+(21, "Walls", 5),
 (22, "Mine", 4),
 (23, "Mega Mine", 4),
 (24, "Log Trap", 4),
@@ -59,7 +60,7 @@ INSERT INTO `building_enum` (id, name, category_id) VALUES
 
 
 INSERT INTO `district_enum` (id, name) VALUES
-(1, "Clan Capital"),
+(1, "Capital Peak"),
 (2, "Barbarian Camp"),
 (3, "Wizard Valley"),
 (4, "Balloon Lagoon"),
