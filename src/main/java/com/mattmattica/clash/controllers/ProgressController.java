@@ -46,7 +46,7 @@ public class ProgressController {
         model.addAttribute("clanCapital", clanCapital);
         PercentageData pd = new PercentageData();
         clanCapital.getDistricts().stream().map(DistrictDTO::getCostPercentageData).forEach(pd::add);
-        System.out.println(pd.getMaxAmount());
+        model.addAttribute("totalPercentageData", pd);
         return "progress";
     }
 
